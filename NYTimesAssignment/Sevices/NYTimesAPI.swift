@@ -51,7 +51,7 @@ typealias JSONObject = [String: JSON]
         }
     }
     
-    
+    // MARK: - Method for requesting data from server
     @objc open func fetchFeaturedArticles(completion: @escaping ([MostPopularArticle]) -> ()) {
         let urlComponents = UrlComponents(path: Constant.path)
         let request = URLRequest(url: urlComponents.url)

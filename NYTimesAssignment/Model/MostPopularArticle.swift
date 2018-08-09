@@ -48,7 +48,7 @@ open class MostPopularArticle: NSObject {
     }
     
 }
-
+// MARK: - Class to retrive the image url
 @objc public class ArticleMedia: NSObject {
     let thumbnailImageUrl: URL?
     init(jsonFromFeaturedArticle: JSONObject) {

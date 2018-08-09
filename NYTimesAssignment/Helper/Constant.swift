@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+
 class Constant {
     static let apiKey = "60aeaeae7fff4477958cfe2a8a6a76f5"
     static let baseUrlString = "https://api.nytimes.com/svc/"

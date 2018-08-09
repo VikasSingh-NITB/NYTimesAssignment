@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return refreshControl
     }()
     
+    // MARK: - View Life Cycle Method
     override func viewDidLoad() {
         super.viewDidLoad()
         self.articleTableView.addSubview(self.refreshControl)
@@ -36,11 +37,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    
+    // MARK: - Method to fetch most popular data for last 7 days
     @objc func fetchMostPopularArticles()  {
         
         NYTimesAPI.sharedInstance.fetchFeaturedArticles(completion: {(articles) -> Void in
     
             self.viewModels = articles
+            //implement sortng by date
             self.viewModels.sort(by: { $0.publishDate.compare($1.publishDate) == .orderedDescending})
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
@@ -56,6 +60,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
+    
+     // MARK: - tableView data source method
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
@@ -66,10 +72,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell:CustomCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! CustomCell
         let viewModel = self.viewModels[indexPath.row]
+        //shown data on tableview cell
         cell.configureWithViewModel(viewModel: viewModel)
         return cell
     }
     
+    // MARK: - tableView delegate method
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
