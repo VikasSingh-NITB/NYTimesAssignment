@@ -12,7 +12,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var articleTableView : UITableView!
     @IBOutlet weak var indicator : UIActivityIndicatorView!
-    
+    var currentRow = 0
     let cellReuseIdentifier = "CustomCell"
     
     var viewModels = [MostPopularArticle]()
@@ -35,6 +35,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         indicator.startAnimating()
         fetchMostPopularArticles()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "Most Popular Articles"
     }
     
     
@@ -81,6 +86,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
+        currentRow = indexPath.row
+        self.performSegue(withIdentifier: "detailViewIdentifier", sender: self)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier ==  "detailViewIdentifier"{
+            let vc = segue.destination as! DetailViewController
+            vc.viewModel = self.viewModels[currentRow]
+            navigationItem.title = nil
+        }
     }
 }
 

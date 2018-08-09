@@ -26,7 +26,7 @@
 * Imlemented Pull to refresh functionality on tableview to fetch latest articles.
 * Showing articles in decending order by date.
 * Implemented unit test case by using XCTest, to achieve good code coverage
-* TODO:When a user taps on an article, it should push a detail view controller onto the navigation stack and present some details about that article.
+* When a user taps on an article, it will push a detail view controller onto the navigation stack and present some details about that article.
 
 ### Run Test Case
 

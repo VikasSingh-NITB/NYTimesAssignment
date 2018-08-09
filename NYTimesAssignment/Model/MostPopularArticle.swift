@@ -48,11 +48,16 @@ open class MostPopularArticle: NSObject {
     }
     
 }
+
+
 // MARK: - Class to retrive the image url
 @objc public class ArticleMedia: NSObject {
+    
     let thumbnailImageUrl: URL?
+    let detailImageUrl: URL?
     init(jsonFromFeaturedArticle: JSONObject) {
         var thumbnailUrl: URL? = nil
+        var detailUrl: URL? = nil
         
         if let media = jsonFromFeaturedArticle[Constants.media] as? JSONArray, let metaData = media.first as? JSONObject,
             let mediaMetadata = metaData[Constants.mediaMetadata] as? JSONArray {
@@ -61,7 +66,15 @@ open class MostPopularArticle: NSObject {
                     thumbnailUrl = URL(string: thumbnailUrlString)
                 }
             }
+            
+            if let imageComposite = mediaMetadata.first as? JSONObject {
+                if let detailUrlString = imageComposite[Constants.url] as? String  {
+                    detailUrl = URL(string: detailUrlString)
+                }
+            }
         }
+        
+        self.detailImageUrl = detailUrl
         self.thumbnailImageUrl = thumbnailUrl
     }
 }
