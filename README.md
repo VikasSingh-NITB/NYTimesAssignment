@@ -1,6 +1,6 @@
 # NYTimesAssignment Project
 
-* This app supports iPhones and iPads running iOS 10.
+* This app supports iPhones and iPads running iOS 10 and above.
 * Built with Xcode Version 9.4. Written in Swift 4.1.2 
 * This sample project initially displays a list of the most popular New York Times articles from the last 7 days.
 * I implemented MVC pattern for this project.
